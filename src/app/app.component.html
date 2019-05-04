@@ -1,4 +1,4 @@
-<mat-sidenav-container>
+<!-- <mat-sidenav-container>
 
   <app-toolbar *ngIf="login"></app-toolbar>
 
@@ -10,5 +10,20 @@
     <router-outlet></router-outlet>
     <app-footer *ngIf="login"></app-footer>
   </div>
+
+</mat-sidenav-container> -->
+
+<mat-sidenav-container>
+
+    <app-toolbar></app-toolbar>
   
-</mat-sidenav-container>
+    <mat-sidenav #appDrawer mode="{{ mode }}" opened="{{ opened }}">
+      <app-sidenav></app-sidenav>
+    </mat-sidenav>
+  
+    <div class="router-outlet">
+      <router-outlet></router-outlet>
+      <app-footer></app-footer>
+    </div>
+    
+  </mat-sidenav-container>
