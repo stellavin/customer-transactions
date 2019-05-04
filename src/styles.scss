@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~bootstrap/scss/bootstrap-reboot';
+@import '~bootstrap/scss/bootstrap-grid';
+@import '~bootstrap/scss/bootstrap';
+body {
+    font-family: 'Kanit';
+    margin: 0px;
+    height: 100vh;
+}
+
+.router-outlet {
+    padding: 12px;
+}
+
+.container {
+    background: #ffffff;
+}
+
+* {
+    &:active,
+    :focus {
+        outline: none !important;
+    }
+}

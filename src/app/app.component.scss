@@ -1,0 +1,19 @@
+@import '../app.theme.scss';
+
+mat-sidenav {
+    width: 250px;
+    height: 100vh;
+    border: none !important;
+    background-color: $primary !important;
+}
+
+mat-sidenav-container {
+    height: 100vh;
+}
+
+app-footer {
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    min-height: 50px !important;
+}

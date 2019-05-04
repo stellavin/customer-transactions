@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button *ngIf="isMenuIcon" mat-icon-button (click)="sidenavService.openNav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="pl-5" *ngIf="!isMenuIcon">My Transactions</span>
+    <span class="example-spacer"></span>
+
+
+    <div>
+      <span class="profile" [matMenuTriggerFor]="profile">
+        <img src="./assets/profile.jpeg">
+        <span>&nbsp; Stella Sikhila</span>
+      </span>
+      <mat-menu #profile="matMenu">
+        <button mat-menu-item>
+          <mat-icon svgIcon="lock-outline"></mat-icon>
+          <span>Log out</span>
+        </button>
+      </mat-menu>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
