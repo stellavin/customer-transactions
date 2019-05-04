@@ -10,12 +10,20 @@ import { MaterialModule } from './material/material.module';
 import { HomeComponent } from './pages/home/home.component';
 import { ComponentsModule } from './components/components.module';
 import { SettingsComponent } from './pages/settings/settings.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { LoginComponent } from './pages/login/login.component';
+import { DepositsComponent } from './pages/deposits/deposits.component';
+import { WithdrawalsComponent } from './pages/withdrawals/withdrawals.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    SettingsComponent
+    SettingsComponent,
+    RegisterComponent,
+    LoginComponent,
+    DepositsComponent,
+    WithdrawalsComponent
   ],
   imports: [
     BrowserAnimationsModule,
