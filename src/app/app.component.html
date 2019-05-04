@@ -1,10 +1,14 @@
 <mat-sidenav-container>
-  <app-toolbar></app-toolbar>
-  <mat-sidenav #appDrawer mode="{{ mode }}" opened="{{ opened }}">
+
+  <app-toolbar *ngIf="login"></app-toolbar>
+
+  <mat-sidenav *ngIf="login" #appDrawer mode="{{ mode }}" opened="{{ opened }}">
     <app-sidenav></app-sidenav>
   </mat-sidenav>
+
   <div class="router-outlet">
     <router-outlet></router-outlet>
-    <app-footer></app-footer>
+    <app-footer *ngIf="login"></app-footer>
   </div>
+  
 </mat-sidenav-container>

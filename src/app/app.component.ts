@@ -10,6 +10,7 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('appDrawer') appDrawer: ElementRef;
   mode = 'over';
   opened = false;
+  login = false;
 
   constructor(
     public sidenavService: SidenavService,
