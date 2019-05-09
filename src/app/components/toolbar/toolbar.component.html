@@ -10,10 +10,10 @@
     <div>
       <span class="profile" [matMenuTriggerFor]="profile">
         <img src="./assets/profile.jpeg">
-        <span>&nbsp; Stella Sikhila</span>
+        <span>&nbsp; {{currentUser.firstName}} {{currentUser.lastName}}</span>
       </span>
       <mat-menu #profile="matMenu">
-        <button mat-menu-item (click)="login()" >
+        <button mat-menu-item (click)="loginOut()" >
           <mat-icon svgIcon="lock-outline"></mat-icon>
           <span>Log out</span>
         </button>

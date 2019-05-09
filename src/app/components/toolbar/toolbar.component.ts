@@ -1,6 +1,9 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ChangeDetectorRef } from '@angular/core';
 import { SidenavService } from '../sidenav/sidenav.service';
 import { Router } from '@angular/router';
+import { User } from '../../pages/_model/user';
+import { Subscription } from 'rxjs';
+import { AuthenticationService, UserService } from '../../pages/_services';
 
 @Component({
   selector: 'app-toolbar',
@@ -9,15 +12,24 @@ import { Router } from '@angular/router';
 })
 export class ToolbarComponent implements OnInit {
   isMenuIcon = true;
+  currentUser: User;
+  currentUserSubscription: Subscription;
+
   @HostListener('window:resize') onResize() {
     this.onResizeDisplay();
   }
 
   constructor(
+    private router: Router,
     public sidenavService: SidenavService,
-    private router: Router
+    private changeDetectorRef: ChangeDetectorRef,
+    private authenticationService: AuthenticationService,
+    private userService: UserService
   ) {
     this.onResizeDisplay();
+    this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
+        this.currentUser = user;
+  });
   }
 
   ngOnInit() {
@@ -31,8 +43,9 @@ export class ToolbarComponent implements OnInit {
     }
   }
 
-  login() {
+  loginOut() {
     console.log('clicked');
+    this.authenticationService.logout();
     this.router.navigate(['/']);
 
   }

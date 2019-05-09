@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { SidenavService } from './sidenav.service';
+import { User } from '../../pages/_model/user';
+import { Subscription } from 'rxjs';
+import { AuthenticationService, UserService } from '../../pages/_services';
 
 @Component({
   selector: 'app-sidenav',
@@ -9,10 +12,20 @@ import { SidenavService } from './sidenav.service';
 })
 export class SidenavComponent implements OnInit {
   public activeRoute = '';
+  currentUser: User;
+  currentUserSubscription: Subscription;
+
   constructor(
     private route: Router,
-    private sidenavService: SidenavService
-  ) { }
+    public sidenavService: SidenavService,
+    private changeDetectorRef: ChangeDetectorRef,
+    private authenticationService: AuthenticationService,
+    private userService: UserService
+  ) {
+    this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
+        this.currentUser = user;
+  });
+  }
 
   ngOnInit() {
   }
