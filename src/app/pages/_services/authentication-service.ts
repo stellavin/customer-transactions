@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../_model/user';
 
-const apiUrl = 'http://localhost:4000';
+const apiUrl = 'http://localhost:4200';
 
 @Injectable({ providedIn: 'root' })
 
