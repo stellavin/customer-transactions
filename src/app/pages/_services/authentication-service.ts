@@ -4,9 +4,12 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../_model/user';
 
+const apiUrl = 'http://localhost:4000';
+
 @Injectable({ providedIn: 'root' })
 
 export class AuthenticationService {
+
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
 
@@ -20,7 +23,7 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string) {
-        return this.http.post<any>(`${config.apiUrl}/users/authenticate`, { username, password })
+        return this.http.post<any>(`${apiUrl}/users/authenticate`, { username, password })
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
                 if (user && user.token) {
