@@ -1,3 +1,4 @@
+import { AuthGuard } from './pages/_guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
@@ -17,22 +18,19 @@ const routes: Routes = [{
   component: LoginComponent
 },
 {
-  path: 'settings',
-  component: SettingsComponent
-},
-{
-  path: 'login',
-  component: DepositsComponent
-
-},
-{
   path: 'register',
   component: RegisterComponent
 },
+{
+  path: 'deposits',
+  component: DepositsComponent,
+  canActivate: [AuthGuard]
 
+},
 {
   path: 'withdrawals',
-  component: WithdrawalsComponent
+  component: WithdrawalsComponent,
+  canActivate: [AuthGuard]
 }];
 
 @NgModule({
@@ -40,3 +38,4 @@ const routes: Routes = [{
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+

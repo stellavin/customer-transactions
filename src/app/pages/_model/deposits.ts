@@ -4,4 +4,3 @@ export interface Deposits {
     progress: string;
     color: string;
   }
-  
