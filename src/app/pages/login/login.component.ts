@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
                     this.router.navigate(['/deposits']);
                 },
                 error => {
-                    this.alertService.error(error);
+                    this.errorMsg = error;
                     this.loading = false;
                 });
 

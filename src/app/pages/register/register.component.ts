@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private userService: UserService,
-    private alertService: AlertService
+    private alertService: AlertService,
   ) { }
 
   ngOnInit() {
@@ -39,7 +39,7 @@ export class RegisterComponent implements OnInit {
     }
 
     if (!valid) {
-      this.alertService.error('Please enter a valid email address.', true);
+      this.errorMsg = 'Please enter a valid email address.';
        console.log('Please enter a valid email address.');
     } else {
       this.loading = true;
@@ -47,12 +47,12 @@ export class RegisterComponent implements OnInit {
           .pipe(first())
           .subscribe(
               data => {
-                  this.alertService.success('Registration successful', true);
+                  this.success = 'Registration successful';
                   console.log('user saved ');
                   this.router.navigate(['/']);
               },
               error => {
-                  this.alertService.error(error);
+                  this.errorMsg = error;
                   console.log('user error ', error);
                   this.loading = false;
               });

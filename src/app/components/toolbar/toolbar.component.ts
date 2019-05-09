@@ -47,7 +47,6 @@ export class ToolbarComponent implements OnInit {
     console.log('clicked');
     this.authenticationService.logout();
     this.router.navigate(['/']);
-
   }
 
 }
