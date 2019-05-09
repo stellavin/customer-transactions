@@ -1,5 +1,8 @@
 import { Component, AfterViewInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import { SidenavService } from './components/sidenav/sidenav.service';
+import { User } from './pages/_model/user';
+import { AuthenticationService, UserService } from './pages/_services';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +14,25 @@ export class AppComponent implements AfterViewInit {
   mode = 'over';
   opened = false;
   login = false;
+  currentUser: User;
+  currentUserSubscription: Subscription;
 
   constructor(
     public sidenavService: SidenavService,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private authenticationService: AuthenticationService,
+    private userService: UserService
   ) {
+    this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
+      console.log('current user---', user);
+      if ( user) {
+        this.currentUser = user;
+        this.login = true;
+      } else {
+        this.login = false;
+
+      }
+  });
   }
 
   ngAfterViewInit() {
