@@ -14,7 +14,7 @@ const routes: Routes = [{
 },
 {
   path: '',
-  component: DepositsComponent
+  component: LoginComponent
 },
 {
   path: 'settings',

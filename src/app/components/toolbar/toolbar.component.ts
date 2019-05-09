@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { SidenavService } from '../sidenav/sidenav.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-toolbar',
@@ -13,7 +14,8 @@ export class ToolbarComponent implements OnInit {
   }
 
   constructor(
-    public sidenavService: SidenavService
+    public sidenavService: SidenavService,
+    private router: Router
   ) {
     this.onResizeDisplay();
   }
@@ -27,6 +29,12 @@ export class ToolbarComponent implements OnInit {
     } else {
       this.isMenuIcon = true;
     }
+  }
+
+  login() {
+    console.log('clicked');
+    this.router.navigate(['/']);
+
   }
 
 }
