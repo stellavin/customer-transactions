@@ -2,21 +2,20 @@
 
  <form [formGroup]='datFormGroup' (ngSubmit)='addDeposit()'  novalidate >
     <mat-form-field>
-        <input matInput placeholder="Check Number" type="text"  value="">
+        <input matInput required formControlName="cheque" placeholder="Cheque Number" type="text"  value="">
       </mat-form-field>
 
       <mat-form-field class="left-margin">
-          <input matInput placeholder="Amount" type="number" value="">
+          <input matInput required  formControlName="amount" placeholder="Amount" type="number" value="">
       </mat-form-field>
 
       <mat-form-field class="left-margin">
-          <input matInput placeholder="Date" type="date"  value="">
+          <input matInput required formControlName="date" placeholder="Date" type="date"  value="">
       </mat-form-field>
-
 
     <mat-form-field class="left-margin">
-      <mat-select matInput name="mySelect" placeholder= "Select Bank">
-          <mat-option *ngFor="let bank of banks">
+      <mat-select matInput name="mySelect" placeholder= "Select Bank" formControlName ="bank">
+          <mat-option  *ngFor="let bank of banks" [value]="bank">
               {{bank}}
           </mat-option>
       </mat-select>
@@ -50,10 +49,10 @@
       <td mat-cell *matCellDef="let row"> {{row.date}} </td>
     </ng-container>
 
-    <!-- Check number Column -->
-    <ng-container matColumnDef="check number">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Check Number </th>
-      <td mat-cell *matCellDef="let row"> {{row.checkNumber}} </td>
+    <!-- cheque number Column -->
+    <ng-container matColumnDef="cheque number">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Cheque Number </th>
+      <td mat-cell *matCellDef="let row"> {{row.cheque}} </td>
     </ng-container>
 
     <!-- amount Column -->

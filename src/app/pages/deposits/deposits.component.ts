@@ -2,7 +2,7 @@ import { DataService } from './../_services/data-service';
 import { Deposits } from './../_model/deposits';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-deposits',
@@ -10,7 +10,7 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./deposits.component.css']
 })
 export class DepositsComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'bank name', 'date', 'check number', 'amount', 'actions'];
+  displayedColumns: string[] = ['id', 'bank name', 'date', 'cheque number', 'amount', 'actions'];
   dataSource: MatTableDataSource<Deposits>;
   banks: string[] = [
     'Cavmont Bank Limited',
@@ -24,14 +24,23 @@ export class DepositsComponent implements OnInit {
 
   deposits: Deposits[] = [];
   datFormGroup: FormGroup;
+  validator: FormGroup;
 
   constructor(
-    public appservice: DataService
+    public appservice: DataService,
+    public formBuilder: FormBuilder
   ) {
     this.getDeposits();
   }
 
   ngOnInit() {
+   
+    this.datFormGroup = this.formBuilder.group({
+      cheque: ['', Validators.required],
+      amount: ['', Validators.required],
+      date: ['', Validators.required],
+      bank: ['', Validators.required]
+    });
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -51,8 +60,18 @@ export class DepositsComponent implements OnInit {
     }
   }
   addDeposit() {
-    
+    if (!this.datFormGroup.invalid) {
+    console.log('values-----', this.datFormGroup.invalid);
+    this.appservice.addDeposits(this.datFormGroup.value).subscribe(data => {
+      // this.user = data;
+      alert('New deposit was added successfully!!');
+      console.log(data);
+      this.datFormGroup.reset();
+    });
+    this.getDeposits();
   }
+}
+
 }
 
 

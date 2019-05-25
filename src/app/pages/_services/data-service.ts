@@ -1,3 +1,4 @@
+
 import { Deposits } from './../_model/deposits';
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
@@ -11,7 +12,7 @@ export class DataService {
 
   apiurl = 'api/deposits';   // Our created Deposit Data can be accessed here at api/deposits
   headers = new HttpHeaders().set('Content-Type', 'application/json').set('Accept', 'application/json');
-  perfop = {
+  httpOptions = {
     headers: this.headers
   };
 
@@ -30,5 +31,14 @@ getDeposits(): Observable<Deposits[]> {
       catchError(this.handleError)
     );
   }
+
+//   a function to add deposits
+addDeposits (deposit: Deposits): Observable<Deposits> {
+    deposit.id = null;
+    return this.http.post<Deposits>(this.apiurl, deposit, this.httpOptions).pipe(
+      tap(data => console.log(data)),
+      catchError(this.handleError)
+    );
+}
 
 }

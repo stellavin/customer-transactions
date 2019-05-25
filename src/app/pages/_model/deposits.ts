@@ -1,7 +1,7 @@
 export interface Deposits {
-    id: Number;
+    id: 0;
     date: string;
     bank: string;
-    checkNumber: string;
+    cheque: string;
     amount: string;
   }
