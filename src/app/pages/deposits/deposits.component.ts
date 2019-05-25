@@ -2,6 +2,7 @@ import { DataService } from './../_services/data-service';
 import { Deposits } from './../_model/deposits';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-deposits',
@@ -11,11 +12,18 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 export class DepositsComponent implements OnInit {
   displayedColumns: string[] = ['id', 'bank name', 'date', 'check number', 'amount', 'actions'];
   dataSource: MatTableDataSource<Deposits>;
+  banks: string[] = [
+    'Cavmont Bank Limited',
+    'Backlays Bank',
+    'Stanbic Bank',
+    'Indo Zambia Bank',
+  ];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   deposits: Deposits[] = [];
+  datFormGroup: FormGroup;
 
   constructor(
     public appservice: DataService
@@ -41,6 +49,9 @@ export class DepositsComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+  addDeposit() {
+    
   }
 }
 

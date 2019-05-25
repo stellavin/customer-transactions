@@ -20,4 +20,14 @@ table {
   background-color: #69f0ae !important;
   color: #fff !important;
 }
-  
+form{
+  display: inline-flex !important;
+}
+.left-margin {
+  margin-left: 20px;
+}
+.add-button {
+  width: 100%;
+  height: 37px;
+  margin-left: 10px;
+}

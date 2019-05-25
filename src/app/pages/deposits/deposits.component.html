@@ -1,5 +1,32 @@
+<h5>Add Deposits  </h5>
+
+ <form [formGroup]='datFormGroup' (ngSubmit)='addDeposit()'  novalidate >
+    <mat-form-field>
+        <input matInput placeholder="Check Number" type="text"  value="">
+      </mat-form-field>
+
+      <mat-form-field class="left-margin">
+          <input matInput placeholder="Amount" type="number" value="">
+      </mat-form-field>
+
+      <mat-form-field class="left-margin">
+          <input matInput placeholder="Date" type="date"  value="">
+      </mat-form-field>
+
+
+    <mat-form-field class="left-margin">
+      <mat-select matInput name="mySelect" placeholder= "Select Bank">
+          <mat-option *ngFor="let bank of banks">
+              {{bank}}
+          </mat-option>
+      </mat-select>
+  </mat-form-field>
+  <button class= 'btn btn-info add-button'>Add Deposit</button>
+</form><br><br>
+
+
 <mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search here ...">
 </mat-form-field>
 
 <div class="mat-elevation-z8">
@@ -60,4 +87,6 @@
 
   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>
+
+
 
