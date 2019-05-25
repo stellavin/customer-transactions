@@ -9,7 +9,7 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
   styleUrls: ['./deposits.component.css']
 })
 export class DepositsComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'bank name', 'date', 'check number', 'amount'];
+  displayedColumns: string[] = ['id', 'bank name', 'date', 'check number', 'amount', 'actions'];
   dataSource: MatTableDataSource<Deposits>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

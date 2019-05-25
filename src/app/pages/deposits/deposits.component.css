@@ -8,6 +8,16 @@ table {
   }
   
   td, th {
-    width: 25%;
+    width: 1%;
   }
+  .mat-success {
+    background-color: #B22222;
+    color: #fff;
+    padding-left: 20px !important;
+    margin-left: 10px !important;
+}
+.mat-edit {
+  background-color: #69f0ae !important;
+  color: #fff !important;
+}
   
