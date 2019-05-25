@@ -16,8 +16,10 @@ import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DepositsComponent } from './pages/deposits/deposits.component';
 import { WithdrawalsComponent } from './pages/withdrawals/withdrawals.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './pages/_helpers/jwt.interceptor';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { DepositsData } from './pages/_model/deposit-store';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { JwtInterceptor } from './pages/_helpers/jwt.interceptor';
     ComponentsModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    AppRoutingModule, InMemoryWebApiModule.forRoot(DepositsData)
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -1,6 +1,7 @@
 export interface Deposits {
-    id: string;
-    name: string;
-    progress: string;
-    color: string;
+    id: Number;
+    date: string;
+    bank: string;
+    checkNumber: string;
+    amount: string;
   }
