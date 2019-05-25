@@ -22,4 +22,13 @@ export class DataService {
     console.error(error);
     return throwError(error);
   }
+
+// Fetch Deposit data
+getDeposits(): Observable<Deposits[]> {
+    return this.http.get<Deposits[]>(this.apiurl).pipe(
+      tap(data => console.log(data)),
+      catchError(this.handleError)
+    );
+  }
+
 }
