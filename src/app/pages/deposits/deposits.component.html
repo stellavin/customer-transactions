@@ -20,7 +20,7 @@
           </mat-option>
       </mat-select>
   </mat-form-field>
-  <button class= 'btn btn-info add-button'>Add Deposit</button>
+  <button class= 'btn btn-primary add-button'>Add Deposit</button>
 </form><br><br>
 
 
@@ -70,7 +70,7 @@
               Edit
           </button>
           
-          <button mat-raised-button class="mat-success">
+          <button mat-raised-button class="mat-success" (click)='delete(row.id)'>
               <mat-icon>delete</mat-icon>
               Delete
           </button>

@@ -34,7 +34,6 @@ export class DepositsComponent implements OnInit {
   }
 
   ngOnInit() {
-   
     this.datFormGroup = this.formBuilder.group({
       cheque: ['', Validators.required],
       amount: ['', Validators.required],
@@ -70,6 +69,14 @@ export class DepositsComponent implements OnInit {
     });
     this.getDeposits();
   }
+}
+
+delete(id) {
+  console.log('id----', id);
+  this.appservice.delete(id).subscribe(data => {
+    this.getDeposits();
+  });
+
 }
 
 }

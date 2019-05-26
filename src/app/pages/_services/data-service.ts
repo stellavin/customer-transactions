@@ -41,4 +41,13 @@ addDeposits (deposit: Deposits): Observable<Deposits> {
     );
 }
 
+// delete
+
+delete(id: number): Observable<Deposits> {
+  const url = `${this.apiurl}/${id}`;
+  return this.http.delete<Deposits>(url, this.httpOptions).pipe(
+    catchError(this.handleError)
+  );
+}
+
 }
