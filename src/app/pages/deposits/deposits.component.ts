@@ -1,7 +1,7 @@
 import { DataService } from './../_services/data-service';
 import { Deposits } from './../_model/deposits';
 import {Component, OnInit, ViewChild, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatPaginator, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
+import {MatDialogRef,MAT_DIALOG_DATA, MatDialog, MatPaginator, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 export interface DialogData {
@@ -91,9 +91,15 @@ delete(id) {
 
 }
 
-update(item) {
-  console.log('item----', item);
 
+update(item) {
+  console.log('items---000----', item);
+    this.appservice.update(item).subscribe(data1 => {
+      this.getDeposits();
+      this.snackBar.open('Edited Successfully', '', {
+        duration: 3000,
+      });
+  });
 }
 
 openDialog(item) {
@@ -104,7 +110,10 @@ openDialog(item) {
   });
 
   dialogRef.afterClosed().subscribe(result => {
-    console.log(`Dialog result: ${result}`);
+    console.log(`Dialog result: ${result}`, item);
+    if (result !== true) {
+      this.update(item);
+    }
   });
 }
 
@@ -117,8 +126,13 @@ openDialog(item) {
 export class UpdateComponent {
 
   constructor(
-    public dialogRef: MatDialog<UpdateComponent>,
+    public dialogRef2: MatDialogRef<UpdateComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData ) { }
+
+    update2(): void {
+      console.log('items---to---update--');
+      this.dialogRef2.close(true);
+    }
 }
 
 

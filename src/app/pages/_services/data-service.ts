@@ -3,7 +3,7 @@ import { Deposits } from './../_model/deposits';
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
+import { tap, catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +46,16 @@ addDeposits (deposit: Deposits): Observable<Deposits> {
 delete(id: number): Observable<Deposits> {
   const url = `${this.apiurl}/${id}`;
   return this.http.delete<Deposits>(url, this.httpOptions).pipe(
+    catchError(this.handleError)
+  );
+}
+
+// update
+
+update(deposit: Deposits): Observable<Deposits> {
+  const url = `${this.apiurl}/${deposit.id}`;
+  return this.http.put<Deposits>(this.apiurl, deposit, this.httpOptions).pipe(
+    map(() => deposit),
     catchError(this.handleError)
   );
 }
