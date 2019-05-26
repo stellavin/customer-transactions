@@ -31,3 +31,6 @@ form{
   height: 37px;
   margin-left: 10px;
 }
+.form2{
+  display: grid !important;
+}

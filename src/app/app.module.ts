@@ -14,7 +14,7 @@ import { ComponentsModule } from './components/components.module';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
-import { DepositsComponent } from './pages/deposits/deposits.component';
+import { DepositsComponent, UpdateComponent } from './pages/deposits/deposits.component';
 import { WithdrawalsComponent } from './pages/withdrawals/withdrawals.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './pages/_helpers/jwt.interceptor';
@@ -29,7 +29,8 @@ import { DepositsData } from './pages/_model/deposit-store';
     RegisterComponent,
     LoginComponent,
     DepositsComponent,
-    WithdrawalsComponent
+    WithdrawalsComponent,
+    UpdateComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -48,7 +49,10 @@ import { DepositsData } from './pages/_model/deposit-store';
     // provider used to create fake backend
     fakeBackendProvider
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    UpdateComponent
+]
 })
 export class AppModule {
 

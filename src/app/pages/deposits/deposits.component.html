@@ -65,7 +65,7 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
       <td mat-cell *matCellDef="let row" > 
-          <button mat-raised-button class="mat-edit">
+          <button mat-raised-button class="mat-edit" (click)='openDialog(row)'>
               <mat-icon>edit</mat-icon>
               Edit
           </button>

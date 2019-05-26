@@ -1,9 +1,13 @@
 import { DataService } from './../_services/data-service';
 import { Deposits } from './../_model/deposits';
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import {Component, OnInit, ViewChild, Inject} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialog, MatPaginator, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+export interface DialogData {
+  cheque: string;
+  amount: Number;
+}
 @Component({
   selector: 'app-deposits',
   templateUrl: './deposits.component.html',
@@ -18,6 +22,8 @@ export class DepositsComponent implements OnInit {
     'Stanbic Bank',
     'Indo Zambia Bank',
   ];
+  cheque: string;
+  amount: Number;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -28,7 +34,9 @@ export class DepositsComponent implements OnInit {
 
   constructor(
     public appservice: DataService,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {
     this.getDeposits();
   }
@@ -62,8 +70,9 @@ export class DepositsComponent implements OnInit {
     if (!this.datFormGroup.invalid) {
     console.log('values-----', this.datFormGroup.invalid);
     this.appservice.addDeposits(this.datFormGroup.value).subscribe(data => {
-      // this.user = data;
-      alert('New deposit was added successfully!!');
+      this.snackBar.open('New deposit was added successfully!!', '', {
+        duration: 3000,
+      });
       console.log(data);
       this.datFormGroup.reset();
     });
@@ -75,11 +84,43 @@ delete(id) {
   console.log('id----', id);
   this.appservice.delete(id).subscribe(data => {
     this.getDeposits();
+    this.snackBar.open('Deleted Successfully', '', {
+      duration: 3000,
+    });
   });
 
 }
 
+update(item) {
+  console.log('item----', item);
+
 }
+
+openDialog(item) {
+  console.log('items-----00', item);
+  const dialogRef = this.dialog.open(UpdateComponent, {
+    width: '500px',
+    data: {deposits: item, banks: this.banks}
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result: ${result}`);
+  });
+}
+
+}
+
+@Component({
+  selector: 'app-update',
+  templateUrl: './update.component.html',
+})
+export class UpdateComponent {
+
+  constructor(
+    public dialogRef: MatDialog<UpdateComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData ) { }
+}
+
 
 
 
