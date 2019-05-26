@@ -1,9 +1,10 @@
 
 import { DataService } from './../_services/data-service';
-import { Deposits } from './../_model/deposits';
+import { Deposits, Withdrawals } from './../_model/deposits';
 import {Component, OnInit, ViewChild, Inject} from '@angular/core';
 import {MatDialogRef,MAT_DIALOG_DATA, MatDialog, MatPaginator, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { WithdrawalsService } from '../_services/withdrawals.service';
 
 export interface DialogData {
   cheque: string;
@@ -15,8 +16,8 @@ export interface DialogData {
   styleUrls: ['./withdrawals.component.css']
 })
 export class WithdrawalsComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'bank name', 'date', 'cheque number', 'amount', 'actions'];
-  dataSource: MatTableDataSource<Deposits>;
+  displayedColumns: string[] = ['id', 'bank name', 'date', 'amount', 'actions'];
+  dataSource: MatTableDataSource<Withdrawals>;
   banks: string[] = [
     'Cavmont Bank Limited',
     'Backlays Bank',
@@ -29,22 +30,21 @@ export class WithdrawalsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  deposits: Deposits[] = [];
+  withdrawal: Withdrawals[] = [];
   datFormGroup: FormGroup;
   validator: FormGroup;
 
   constructor(
-    public appservice: DataService,
+    public appservice: WithdrawalsService,
     public formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
     public dialog: MatDialog
   ) {
-    this.getDeposits();
+    this.getWithdrawals();
   }
 
   ngOnInit() {
     this.datFormGroup = this.formBuilder.group({
-      cheque: ['', Validators.required],
       amount: ['', Validators.required],
       date: ['', Validators.required],
       bank: ['', Validators.required]
@@ -53,9 +53,9 @@ export class WithdrawalsComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  getDeposits() {
-    this.appservice.getDeposits().subscribe(data => {
-      this.deposits = data;
+  getWithdrawals() {
+    this.appservice.getWithdrawals().subscribe(data => {
+      this.withdrawal = data;
       this.dataSource = new MatTableDataSource(data);
     });
 }
@@ -67,24 +67,24 @@ export class WithdrawalsComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  addDeposit() {
+  add() {
     if (!this.datFormGroup.invalid) {
     console.log('values-----', this.datFormGroup.invalid);
-    this.appservice.addDeposits(this.datFormGroup.value).subscribe(data => {
+    this.appservice.add(this.datFormGroup.value).subscribe(data => {
       this.snackBar.open('New deposit was added successfully!!', '', {
         duration: 3000,
       });
       console.log(data);
       this.datFormGroup.reset();
     });
-    this.getDeposits();
+    this.getWithdrawals();
   }
 }
 
 delete(id) {
   console.log('id----', id);
   this.appservice.delete(id).subscribe(data => {
-    this.getDeposits();
+    this.getWithdrawals();
     this.snackBar.open('Deleted Successfully', '', {
       duration: 3000,
     });
@@ -96,7 +96,7 @@ delete(id) {
 update(item) {
   console.log('items---000----', item);
     this.appservice.update(item).subscribe(data1 => {
-      this.getDeposits();
+      this.getWithdrawals();
       this.snackBar.open('Edited Successfully', '', {
         duration: 3000,
       });
@@ -107,7 +107,7 @@ openDialog(item) {
   console.log('items-----00', item);
   const dialogRef = this.dialog.open(UpdateWidthdrawalComponent, {
     width: '500px',
-    data: {deposits: item, banks: this.banks}
+    data: {withdrawals: item, banks: this.banks}
   });
 
   dialogRef.afterClosed().subscribe(result => {

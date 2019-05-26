@@ -1,21 +1,18 @@
-<h2 mat-dialog-title>Edit Deposit</h2>
+<h2 mat-dialog-title>Edit Withdrawals</h2>
 <mat-dialog-content class="mat-typography">
 
   <form style='display: grid !important;'  novalidate >
-    <mat-form-field>
-        <input matInput required [(ngModel)]="data.deposits.cheque"  [ngModelOptions]="{standalone: true}" placeholder="Cheque Number" type="text">
+    
+      <mat-form-field class="left-margin">
+          <input matInput required  [(ngModel)]="data.withdrawals.amount"   [ngModelOptions]="{standalone: true}" placeholder="Amount" type="number" value="">
       </mat-form-field>
 
       <mat-form-field class="left-margin">
-          <input matInput required  [(ngModel)]="data.deposits.amount"   [ngModelOptions]="{standalone: true}" placeholder="Amount" type="number" value="">
-      </mat-form-field>
-
-      <mat-form-field class="left-margin">
-          <input matInput required  [(ngModel)]="data.deposits.date"  [ngModelOptions]="{standalone: true}" placeholder="Date" type="date"  value="">
+          <input matInput required  [(ngModel)]="data.withdrawals.date"  [ngModelOptions]="{standalone: true}" placeholder="Date" type="date"  value="">
       </mat-form-field>
 
     <mat-form-field class="left-margin">
-      <mat-select matInput name="mySelect" placeholder= "Select Bank" [(ngModel)]="data.deposits.bank"   [ngModelOptions]="{standalone: true}">
+      <mat-select matInput name="mySelect" placeholder= "Select Bank" [(ngModel)]="data.withdrawals.bank"   [ngModelOptions]="{standalone: true}">
           <mat-option  *ngFor="let bank of data.banks" [value]="bank">
               {{bank}}
           </mat-option>
