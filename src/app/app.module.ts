@@ -15,7 +15,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DepositsComponent, UpdateComponent } from './pages/deposits/deposits.component';
-import { WithdrawalsComponent } from './pages/withdrawals/withdrawals.component';
+import { WithdrawalsComponent, UpdateWidthdrawalComponent } from './pages/withdrawals/withdrawals.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './pages/_helpers/jwt.interceptor';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -30,7 +30,8 @@ import { DepositsData } from './pages/_model/deposit-store';
     LoginComponent,
     DepositsComponent,
     WithdrawalsComponent,
-    UpdateComponent
+    UpdateComponent,
+    UpdateWidthdrawalComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -51,7 +52,8 @@ import { DepositsData } from './pages/_model/deposit-store';
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    UpdateComponent
+    UpdateComponent,
+    UpdateWidthdrawalComponent
 ]
 })
 export class AppModule {
