@@ -3,7 +3,7 @@
 
   <form style='display: grid !important;'  novalidate >
     <mat-form-field>
-        <input matInput required [(ngModel)]="data.deposits.cheque"  [ngModelOptions]="{standalone: true}" placeholder="Cheque Number" type="text">
+        <input matInput required [(ngModel)]="data.deposits.bank"  [ngModelOptions]="{standalone: true}" placeholder="Cheque Number" type="text">
       </mat-form-field>
 
       <mat-form-field class="left-margin">
@@ -15,9 +15,9 @@
       </mat-form-field>
 
     <mat-form-field class="left-margin">
-      <mat-select matInput name="mySelect" placeholder= "Select Bank" [(ngModel)]="data.deposits.bank"   [ngModelOptions]="{standalone: true}">
-          <mat-option  *ngFor="let bank of data.banks" [value]="bank">
-              {{bank}}
+      <mat-select matInput name="mySelect" placeholder= "Select transaction type" [(ngModel)]="data.deposits.type"   [ngModelOptions]="{standalone: true}">
+          <mat-option  *ngFor="let type of data.types" [value]="type">
+              {{type}}
           </mat-option>
       </mat-select>
   </mat-form-field>

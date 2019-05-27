@@ -5,7 +5,7 @@ import {MatDialogRef,MAT_DIALOG_DATA, MatDialog, MatPaginator, MatSort, MatTable
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 export interface DialogData {
-  cheque: string;
+  type: string;
   amount: Number;
 }
 @Component({
@@ -14,15 +14,13 @@ export interface DialogData {
   styleUrls: ['./deposits.component.css']
 })
 export class DepositsComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'bank name', 'date', 'cheque number', 'amount', 'actions'];
+  displayedColumns: string[] = ['id', 'bank name', 'date', 'type', 'amount', 'actions'];
   dataSource: MatTableDataSource<Deposits>;
-  banks: string[] = [
-    'Cavmont Bank Limited',
-    'Backlays Bank',
-    'Stanbic Bank',
-    'Indo Zambia Bank',
+  types: string[] = [
+    'Deposit',
+    'Withdrawal'
   ];
-  cheque: string;
+  type: string;
   amount: Number;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -43,10 +41,10 @@ export class DepositsComponent implements OnInit {
 
   ngOnInit() {
     this.datFormGroup = this.formBuilder.group({
-      cheque: ['', Validators.required],
+      type: ['', Validators.required],
       amount: ['', Validators.required],
       date: ['', Validators.required],
-      bank: ['', Validators.required]
+      bank: ['Zambia Bank']
     });
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -66,7 +64,7 @@ export class DepositsComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  addDeposit() {
+  add() {
     if (!this.datFormGroup.invalid) {
     console.log('values-----', this.datFormGroup.invalid);
     this.appservice.addDeposits(this.datFormGroup.value).subscribe(data => {
@@ -106,7 +104,7 @@ openDialog(item) {
   console.log('items-----00', item);
   const dialogRef = this.dialog.open(UpdateComponent, {
     width: '500px',
-    data: {deposits: item, banks: this.banks}
+    data: {deposits: item, types: this.types}
   });
 
   dialogRef.afterClosed().subscribe(result => {

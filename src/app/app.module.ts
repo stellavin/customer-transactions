@@ -15,11 +15,10 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DepositsComponent, UpdateComponent } from './pages/deposits/deposits.component';
-import { WithdrawalsComponent, UpdateWidthdrawalComponent } from './pages/withdrawals/withdrawals.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './pages/_helpers/jwt.interceptor';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { DepositsData, WithdrawalsData } from './pages/_model/deposit-store';
+import { DepositsData } from './pages/_model/deposit-store';
 
 @NgModule({
   declarations: [
@@ -29,9 +28,7 @@ import { DepositsData, WithdrawalsData } from './pages/_model/deposit-store';
     RegisterComponent,
     LoginComponent,
     DepositsComponent,
-    WithdrawalsComponent,
-    UpdateComponent,
-    UpdateWidthdrawalComponent
+    UpdateComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -54,7 +51,6 @@ import { DepositsData, WithdrawalsData } from './pages/_model/deposit-store';
   bootstrap: [AppComponent],
   entryComponents: [
     UpdateComponent,
-    UpdateWidthdrawalComponent
 ]
 })
 export class AppModule {

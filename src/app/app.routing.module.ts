@@ -6,7 +6,6 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { DepositsComponent } from './pages/deposits/deposits.component';
-import { WithdrawalsComponent } from './pages/withdrawals/withdrawals.component';
 
 const routes: Routes = [{
   path: '',
@@ -24,12 +23,6 @@ const routes: Routes = [{
 {
   path: 'deposits',
   component: DepositsComponent,
-  canActivate: [AuthGuard]
-
-},
-{
-  path: 'withdrawals',
-  component: WithdrawalsComponent,
   canActivate: [AuthGuard]
 }];
 
