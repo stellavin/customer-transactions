@@ -1,5 +1,8 @@
+<!-- <h5 align="end">Total Deosits {{deposit | currency}}</h5>
+<h5 align="end">Total Withdrawals {{withdrawal | currency}}</h5> -->
+<h3 align="end">Total Balance {{total | currency}} </h3>
 
-<h2 align="end">Balance {{total | currency}}</h2>
+
 <h5>Add Transaction  </h5>
 
  <form [formGroup]='datFormGroup' (ngSubmit)='add()'  novalidate >
@@ -23,7 +26,7 @@
       </mat-select>
   </mat-form-field>
   <button class= 'btn btn-primary add-button'>Make transaction</button>
-</form><br><br>
+</form><br>
 
 
 <mat-form-field>

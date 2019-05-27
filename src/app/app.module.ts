@@ -23,6 +23,7 @@ import { DepositsData } from './pages/_model/deposit-store';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from 'src/environments/environment';
+import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +37,7 @@ import { environment } from 'src/environments/environment';
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
+    NgxSpinnerModule,
     MaterialModule,
     ComponentsModule,
     AppRoutingModule,
