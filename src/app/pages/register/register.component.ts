@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { User } from '../_model/user';
 import { AuthenticationService, UserService } from '../_services';
 import { first } from 'rxjs/operators';
+import { AngularFireAuth } from "@angular/fire/auth";
 
 @Component({
   selector: 'app-register',
@@ -15,12 +16,15 @@ export class RegisterComponent implements OnInit {
   public user: User = new User();
   public errorMsg: Object;
   public success: Object;
+  public success2: Object;
   loading = false;
   submitted = false;
+  email: string;
 
 
   constructor(
     private router: Router,
+    public afAuth: AngularFireAuth, // Inject Firebase auth service
     private authenticationService: AuthenticationService,
     private userService: UserService,
     private alertService: AlertService,
@@ -50,19 +54,40 @@ export class RegisterComponent implements OnInit {
     } else if (this.user.password === undefined || this.user.password.length < 3 || this.user.password === '') {
       this.errorMsg = 'Password should be more than 3 letter and it should not be empt';
     } else {
-      this.save();
+      this.SignUp();
     }
   }
 
-  save() {
+  SignUp() {
+    this.email = this.user.email;
+    this.afAuth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password)
+    .then(
+      (success) => {
+         const user: any = this.afAuth.auth.currentUser;
+         user.sendEmailVerification().then(
+           (success2) => {
+            this.success = 'A verification code was sent to' + ' ' +  this.email + '.Click to verify';
+            this.errorMsg = '';
+            this.saveToLocalhost();
+            }).catch(
+           (err) => {
+             this.errorMsg = err;
+           });
+      }).catch(
+        (err) => {
+          this.errorMsg = err;
+        });
+    }
+
+  saveToLocalhost() {
     this.loading = true;
       this.userService.register(this.user)
       .pipe(first())
       .subscribe(
           data => {
-              this.success = 'Registration successful';
+              // this.success = 'Registration successful';
               console.log('user saved ');
-              this.router.navigate(['/']);
+              this.user = new User();
           },
           error => {
               this.errorMsg = error;

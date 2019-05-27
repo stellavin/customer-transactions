@@ -23,9 +23,9 @@ export class DepositsComponent implements OnInit {
   ];
   type: string;
   amount: Number;
-  deposit: Number;
-  withdrawal: Number;
-  total: Number;
+  deposit: any;
+  withdrawal: any;
+  total: any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

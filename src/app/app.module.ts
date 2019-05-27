@@ -1,3 +1,4 @@
+import { AngularFireAuth } from '@angular/fire/auth';
 import { fakeBackendProvider } from './pages/_helpers/fake-backend';
 import { ErrorInterceptor } from './pages/_helpers/error.interceptor';
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
@@ -19,7 +20,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './pages/_helpers/jwt.interceptor';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { DepositsData } from './pages/_model/deposit-store';
-
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireModule } from 'angularfire2';
+import { environment } from 'src/environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,13 +43,16 @@ import { DepositsData } from './pages/_model/deposit-store';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     InMemoryWebApiModule.forRoot(DepositsData),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     // provider used to create fake backend
-    fakeBackendProvider
+    fakeBackendProvider,
+    AngularFireAuth
   ],
   bootstrap: [AppComponent],
   entryComponents: [

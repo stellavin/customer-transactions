@@ -16,7 +16,7 @@
         <form class="login-form">
     
           <mat-form-field>
-            <input matInput placeholder="username"  [(ngModel)]="user.username"  name="username" required>
+            <input matInput placeholder="Email"  [(ngModel)]="user.email"  name="email" required>
           </mat-form-field>
           <br>
     
@@ -28,9 +28,16 @@
       <mat-card-actions>
         <button mat-raised-button (click)="register()" color="danger">Register</button>
   
-        <button mat-raised-button (click)="login()" color="primary">Login</button>
+        <button mat-raised-button (click)="verify()" color="primary">Login</button><br><br>
+
+        <button mat-flat-button transparent (click)="reset()" >Forgot your Password ?</button>
+
       </mat-card-actions>
+
+
+      
     </mat-card>
+    
       </div>
     
     </div>

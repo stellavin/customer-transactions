@@ -21,6 +21,10 @@ const routes: Routes = [{
   component: RegisterComponent
 },
 {
+  path: 'reset',
+  component: HomeComponent
+},
+{
   path: 'deposits',
   component: DepositsComponent,
   canActivate: [AuthGuard]
