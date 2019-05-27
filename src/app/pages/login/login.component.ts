@@ -65,7 +65,6 @@ export class LoginComponent implements OnInit {
     this.afAuth.auth.signInWithEmailAndPassword(email, pass)
     .then(
       (res) => {
-         console.log('im here--- 2', res);
         if (res.user.emailVerified !== true) {
           const user: any = this.afAuth.auth.currentUser;
           user.sendEmailVerification().then(
@@ -73,27 +72,21 @@ export class LoginComponent implements OnInit {
              this.errorMsg = 'please verify your email';
              }).catch(
             (err) => {
-              console.log('im here--- 8', res);
               this.errorMsg = err;
             });
         } else {
             this.setLocalStorage();
         }
     }).catch((error) => {
-          console.log('im here---');
           this.errorMsg = error.message;
     });
   }
 
   setLocalStorage() {
-    console.log('im here--- 3');
     this.submitted = true;
     this.loading = true;
     const array = localStorage.getItem('users');
     const array2 = JSON.parse(array);
-
-    console.warn('array', JSON.parse(array));
-    const index = array2.findIndex(x => x.email === this.user.email);
     const newItem = array2.map(item => {
       if (item.email === this.user.email) {
         return item;
@@ -102,17 +95,21 @@ export class LoginComponent implements OnInit {
     const p = newItem.filter(function(v) {
       return v !== undefined;
       });
+      const password = p[0].password;
 
-    this.authenticationService.login(this.user.email, p.password)
-    .pipe(first())
-    .subscribe(
-        data => {
-            this.router.navigate(['/deposits']);
-        },
-        error => {
-            this.errorMsg = error;
-            this.loading = false;
-      });
+      if ( password !== undefined ) {
+        this.authenticationService.login(this.user.email, password)
+          .pipe(first())
+          .subscribe(
+              data => {
+                  this.router.navigate(['/deposits']);
+              },
+              error => {
+                  this.errorMsg = error;
+                  this.loading = false;
+            });
+
+      }
 
   }
 
