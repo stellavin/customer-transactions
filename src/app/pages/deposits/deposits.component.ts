@@ -1,9 +1,10 @@
+
 import { DataService } from './../_services/data-service';
 import { Deposits } from './../_model/deposits';
 import {Component, OnInit, ViewChild, Inject} from '@angular/core';
 import {MatDialogRef,MAT_DIALOG_DATA, MatDialog, MatPaginator, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import * as _ from 'lodash';
 export interface DialogData {
   type: string;
   amount: Number;
@@ -22,6 +23,9 @@ export class DepositsComponent implements OnInit {
   ];
   type: string;
   amount: Number;
+  deposit: Number;
+  withdrawal: Number;
+  total: Number;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -53,8 +57,30 @@ export class DepositsComponent implements OnInit {
   getDeposits() {
     this.appservice.getDeposits().subscribe(data => {
       this.deposits = data;
+      this.calculateAmount(data);
+      console.log('data---', data);
       this.dataSource = new MatTableDataSource(data);
     });
+}
+
+calculateAmount(array) {
+  const newArray = array.map(item => {
+    if (item.type === 'Deposit') {
+      return item.amount;
+    }
+  });
+  this.deposit = _.sum(newArray);
+  const newArray2 = array.map(item => {
+    if (item.type === 'Withdrawal') {
+      return item.amount;
+    }
+  });
+  this.withdrawal = _.sum(newArray2);
+  console.log(this.deposit);
+  console.log(this.withdrawal);
+  this.total = this.deposit - this.withdrawal;
+ console.log(this.total);
+
 }
 
   applyFilter(filterValue: string) {
