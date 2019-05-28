@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from '../_model/user';
 import { AuthenticationService, UserService } from '../_services';
-import { first } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -85,20 +85,20 @@ export class LoginComponent implements OnInit {
   setLocalStorage() {
     this.submitted = true;
     this.loading = true;
-    const array = localStorage.getItem('users');
-    const array2 = JSON.parse(array);
-    const newItem = array2.map(item => {
-      if (item.email === this.user.email) {
-        return item;
-      }
-    });
-    const p = newItem.filter(function(v) {
-      return v !== undefined;
-      });
-      const password = p[0].password;
+    // const array = localStorage.getItem('users');
+    // const array2 = JSON.parse(array);
+    // const newItem = array2.map(item => {
+    //   if (item.email === this.user.email) {
+    //     return item;
+    //   }
+    // });
+    // const p = newItem.filter(function(v) {
+    //   return v !== undefined;
+    //   });
+    //   const password = p[0].password;
 
-      if ( password !== undefined ) {
-        this.authenticationService.login(this.user.email, password)
+      // if ( password !== undefined ) {
+        this.authenticationService.login(this.user.email, this.user.password)
           .pipe(first())
           .subscribe(
               data => {
@@ -109,7 +109,7 @@ export class LoginComponent implements OnInit {
                   this.loading = false;
             });
 
-      }
+      // }
 
   }
 
